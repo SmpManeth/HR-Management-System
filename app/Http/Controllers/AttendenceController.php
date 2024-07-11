@@ -14,24 +14,20 @@ class AttendenceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($emp_id)
+    public function index()
     {
-        $employee = Employee::find($emp_id);
-        return view('pages.attendance.create', compact('employee'));
+        //get employees with attendances 
+        $employees = Employee::with('attendances')->get();
+        return view('pages.attendance.index', compact('employees'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($emp_id)
     {
-        /**
-         * 
-         * 07/11/2024 -5.00pm - 2.00am next day
-         * if the assigned shift is - 5.00pm - 2.00am , then we needs to check the checkout time
-         * is on the next day 2am or not.if it's not at 2am or before 2am  on the same day then it has be considered as late checkout.
-         * 
-         */
+        $employee = Employee::find($emp_id);
+        return view('pages.attendance.create', compact('employee'));
     }
 
     /**
