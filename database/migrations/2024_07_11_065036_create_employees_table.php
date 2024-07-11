@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->string('Employee_ID');
+            $table->string('First_Name');
+            $table->string('Last_Name');
+            $table->string('email');
+            $table->string('department');
+            $table->string('weekday_shift')->nullable();
+            $table->string('weekend_shift')->nullable();
+            $table->string('total_leaves_per_month')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

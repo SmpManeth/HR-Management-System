@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
-use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -29,9 +29,23 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEmployeeRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'Employee_ID' => 'required',
+            'First_Name' => 'required',
+            'Last_Name' => 'required',
+            'email' => 'required',
+            'department' => 'required',
+            'weekday_shift' => 'nullable',
+            'weekend_shift' => 'nullable',
+            'total_leaves_per_month' => 'required',
+            'status' => 'required',
+        ]);
+
+        //create an Employee with validated data
+        Employee::create($validatedData);
+        return redirect()->route('employees.index');
     }
 
     /**
