@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+// Link Storage 
+Route::get('/linkstorage', function () {
+    Illuminate\Support\Facades\Artisan::call('storage:link');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
