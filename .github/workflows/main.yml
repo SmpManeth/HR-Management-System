@@ -16,8 +16,7 @@ jobs:
         
     - name: Install vendors
       run: |
-          composer update
-          composer install --prefer-dist --no-dev --optimize-autoloader
+          composer install --prefer-dist --optimize-autoloader
           rm -rf node_modules package-lock.json
           npm install
           npm run build
