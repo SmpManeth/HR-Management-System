@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -25,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
     // Attendances
-    Route::get('/attendances', [AttendenceController::class, 'index'])->name('attendances.index');
+    Route::get('/summary', [AttendenceController::class, 'index'])->name('attendances.index');
     Route::get('/attendances/mark/{employee_id}', [AttendenceController::class, 'create'])->name('attendances.create');
     Route::post('/attendances/mark', [AttendenceController::class, 'store'])->name('attendances.store');
     Route::get('/attendances/{attendance}', [AttendenceController::class, 'show'])->name('attendances.show');

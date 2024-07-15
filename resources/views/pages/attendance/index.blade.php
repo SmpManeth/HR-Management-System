@@ -25,7 +25,7 @@
                         <tbody>
                             @foreach ($employees as $employee)
 
-                            @foreach ($employee->attendances->sortBy('date') as $employee_attendances )
+                            @foreach ($employee->attendances->sortBy('date') as $employee_attendances)
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee_attendances->date}}</th>
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
@@ -35,6 +35,7 @@
                                 <td class="px-4 py-3">{{ $employee_attendances->shift}}</td>
                                 <td class="px-4 py-3">
                                     <?php
+                                    
                                         $checkIn = new DateTime($employee_attendances->check_in);
                                         $checkOut = new DateTime($employee_attendances->check_out);
                                         $hoursWorked = $checkIn->diff($checkOut)->format('%h:%i');

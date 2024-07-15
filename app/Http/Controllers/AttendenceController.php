@@ -35,20 +35,50 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-    //   dd($request->all());
+
         $validated = $request->validate([
             'employee_id' => 'required',
-            'date' => 'required', // 'date' => 'required|date_format:Y-m-d',
+            'date' => 'required|unique:attendences,date,NULL,id,employee_id,' . $request->employee_id,
             'check_in' => 'nullable', // 'check_in' => 'required|date_format:H:i:s',
             'check_out' => 'nullable',
-            'status' => 'required',
-            'shift' => 'required',
+            'status' => 'nullable'
         ]);
-        
 
+        // Fget the selected date and check whether its a weekday or a week end. need to check whether employee is late or not by comparing the check_in time with the shift time
+        $selectedDay = date('l', strtotime($request->date));
+        $employee_id = $request->employee_id;
+        $employee = Employee::find($employee_id);
+
+        if ($selectedDay == 'Saturday' || $selectedDay == 'Sunday') {
+            $shift = $employee->weekend_shift;
+        } else {
+            $shift = $employee->weekday_shift;
+        }
+
+        if ($shift == null) {
+        }
+
+
+        $check_in = $request->check_in;
+        $check_out = $request->check_out;
+
+        $shift_time = array_map('trim', explode('-', $shift));
+
+        //check if the employee is late or not by comparing the check_in time with the shift time[0] and checkout with shift time[1]
+        $status = '';
+        if ($check_in > $shift_time[0]) {
+            $status = 'Late Coming';
+        } else if ($check_in == null) {
+            $status =  $validated['status'];
+        }
+        else{
+            $status = 'Present';
+        }
+        $validated['status'] = $status;
+        $validated['shift'] = $shift;
         Attendence::create($validated);
 
-        return redirect()->route('employees.index')->with('success', 'Attendence created successfully');
+        return redirect()->route('employees.index')->with('success', 'Attendence Marked Successfully');
     }
 
     /**
