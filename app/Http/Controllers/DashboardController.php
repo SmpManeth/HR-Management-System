@@ -7,17 +7,31 @@ use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
 use App\Models\Employee;
 use Carbon\Carbon;
-
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get employees with attendances 
-        $employees = Employee::with('attendances')->get();
+
+        if (isset($request->month)) {
+            $year = Carbon::parse($request->month)->year;
+            $month = Carbon::parse($request->month)->month;
+
+            //get the Employees with attendances for the month and year from attendances where date is year and month
+            $employees = Employee::with(['attendances' => function ($query) use ($year, $month) {
+                $query->whereYear('date', $year)->whereMonth('date', $month);
+            }])->get();
+            // dd( $employees);
+        } else {
+    
+            $employees = Employee::with('attendances')->get();
+        }
+
+
 
         //get all the unplaneed leaves , plannned Leaves ,Sick Leaves , Halfdays , an late Comings for each employee from attendances
         $employees->map(function ($employee) {
@@ -26,24 +40,24 @@ class DashboardController extends Controller
             $employee->sick_leaves = $employee->attendances->where('status', 'Sick Leave')->count();
             $employee->halfdays = $employee->attendances->where('status', 'Half Day')->count();
             $employee->late_comings = $employee->attendances->where('status', 'Late Coming')->count();
-        
+
             // Calculating total hours worked for 'Present' and 'Late Coming' statuses
             $employee->total_hours_worked = $employee->attendances->whereIn('status', ['Present', 'Late Coming'])->reduce(function ($carry, $attendance) {
-                    if ($attendance->check_in && $attendance->check_out) {
-                        $checkIn = Carbon::parse($attendance->check_in);
-                        $checkOut = Carbon::parse($attendance->check_out);
-                        $hours = $checkIn->diffInHours($checkOut);
-                        return $carry + $hours;
-                    }
-                    return $carry;
-                }, 0); // Start reducing with an initial value of 0
-        
+                if ($attendance->check_in && $attendance->check_out) {
+                    $checkIn = Carbon::parse($attendance->check_in);
+                    $checkOut = Carbon::parse($attendance->check_out);
+                    $hours = $checkIn->diffInHours($checkOut);
+                    return $carry + $hours;
+                }
+                return $carry;
+            }, 0); // Start reducing with an initial value of 0
+
             return $employee;
         });
-        
 
 
-        
+
+
         return view('dashboard', compact('employees'));
     }
 

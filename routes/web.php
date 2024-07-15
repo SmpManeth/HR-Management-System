@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     // Attendances
     Route::get('/summary', [AttendenceController::class, 'index'])->name('attendances.index');
+    Route::post('/summary/byMonth/', [DashboardController::class, 'index'])->name('attendances.search');
     Route::get('/attendances/mark/{employee_id}', [AttendenceController::class, 'create'])->name('attendances.create');
     Route::post('/attendances/mark', [AttendenceController::class, 'store'])->name('attendances.store');
     Route::get('/attendances/{attendance}', [AttendenceController::class, 'show'])->name('attendances.show');

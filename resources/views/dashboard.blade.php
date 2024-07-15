@@ -1,6 +1,22 @@
 <x-app-layout>
     <h2 class="mb-4 text-xl text-center underline font-semibold leading-none text-gray-900 dark:text-white">Attendance Summary</h2>
 
+    <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+     
+        <form action="{{ route('attendances.search')}}" method="post">
+            @csrf
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <input type="month" name="month" id="month" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('month') }}">
+                </div>
+                <div class="flex items">
+                    <button type="submit" class="px-4 py-2 text-sm text-white bg-primary-600 rounded-lg hover:bg-primary-700">Filter</button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+
     <!-- Sales -->
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto">
