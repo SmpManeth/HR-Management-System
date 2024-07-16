@@ -61,15 +61,30 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        // dd($employee);
+        return view('pages.employees.edit')->with('employee', $employee);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEmployeeRequest $request, Employee $employee)
+    public function update(Request $request, Employee $employee)
     {
-        //
+        // Retrieve all destinations with their associated images
+        $validatedData = $request->validate([
+            'Employee_ID' => 'required',
+            'First_Name' => 'required',
+            'Last_Name' => 'required',
+            'email' => 'required',
+            'department' => 'required',
+            'weekday_shift' => 'nullable',
+            'weekend_shift' => 'nullable',
+            'total_leaves_per_month' => 'required',
+            'status' => 'required',
+        ]);
+
+        $employee->update($validatedData);
+        return redirect()->route('employees.index')->with('success', 'Employee Update successfully.');
     }
 
     /**
@@ -77,12 +92,11 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-   
+
         $employee = Employee::find($id);
 
         $employee->delete();
 
         return back()->with('success', 'Employee deleted successfully.');
     }
-
 }
