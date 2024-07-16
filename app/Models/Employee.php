@@ -15,6 +15,7 @@ class Employee extends Model
         'Last_Name',
         'email',
         'department',
+        'employee_desgination',
         'weekday_shift',
         'weekend_shift',
         'total_leaves_per_month',

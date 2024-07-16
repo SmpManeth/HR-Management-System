@@ -19,6 +19,7 @@
                                 <th scope="col" class="px-4 py-3">Employee Name</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
                                 <th scope="col" class="px-4 py-3">Department</th>
+                                <th scope="col" class="px-4 py-3">Designation</th>
                                 <th scope="col" class="px-4 py-3">Weekday Shift</th>
                                 <th scope="col" class="px-4 py-3">Weekend Shift</th>
                                 <th scope="col" class="px-4 py-3">Total leaves per Month</th>
@@ -35,6 +36,7 @@
                                 <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
                                 <td class="px-4 py-3">{{ $employee->email}}</td>
                                 <td class="px-4 py-3">{{ $employee->department}}</td>
+                                <td class="px-4 py-3">{{ $employee->employee_desgination}}</td>
                                 <td class="px-4 py-3">{{ $employee->weekday_shift}}</td>
                                 <td class="px-4 py-3">{{ $employee->weekend_shift}}</td>
                                 <td class="px-4 py-3">{{ $employee->total_leaves_per_month}}</td>

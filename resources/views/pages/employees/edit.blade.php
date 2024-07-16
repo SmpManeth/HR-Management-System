@@ -25,7 +25,10 @@
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                         <input value="{{ old('email' , $employee->email ) }}" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name@company.com" required="">
                     </div>
-
+                    <div>
+                        <label for="employee_desgination" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Employee Desgination</label>
+                        <input  value="{{ old('employee_desgination' , $employee->employee_desgination ) }}" type="text" name="employee_desgination" id="employee_desgination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Graphic Designer" required="">
+                    </div>
                     <div>
                         <label for="department" class="inline-flex items-center mb-2 text-sm font-medium text-gray-900 dark:text-white"> Department </label>
                         <select id="department" name="department" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -36,6 +39,7 @@
                             <option value="IT" {{ $employee->department == 'IT' ? 'selected' : '' }}>IT</option>
                             <option value="Sales" {{ $employee->department == 'Sales' ? 'selected' : '' }}>Sales</option>
                             <option value="HR" {{ $employee->department == 'HR' ? 'selected' : '' }}>HR</option>
+                            <option value="PH-Team" {{ $employee->department == 'PH-Team' ? 'selected' : '' }}>PH-Team</option>
                         </select>
                     </div>
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('Last_Name');
             $table->string('email');
             $table->string('department');
+            $table->string('employee_desgination');
             $table->string('weekday_shift')->nullable();
             $table->string('weekend_shift')->nullable();
             $table->string('total_leaves_per_month')->nullable();
