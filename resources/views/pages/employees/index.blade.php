@@ -60,14 +60,18 @@
                                                 <a href="{{ route('attendances.create', ['employee_id' => $employee->id]) }}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mark Attendance</a>
                                             </li>
                                             <li>
-                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                <a href="{{ route('employees.edit' ,$employee->id ) }}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                             </li>
                                             <li>
                                                 <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
                                             </li>
                                         </ul>
                                         <div class="py-1">
-                                            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                            <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>

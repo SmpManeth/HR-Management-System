@@ -45,7 +45,7 @@ class EmployeeController extends Controller
 
         //create an Employee with validated data
         Employee::create($validatedData);
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('success', 'Employee Created successfully.');
     }
 
     /**
@@ -75,8 +75,14 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
-        //
+   
+        $employee = Employee::find($id);
+
+        $employee->delete();
+
+        return back()->with('success', 'Employee deleted successfully.');
     }
+
 }
