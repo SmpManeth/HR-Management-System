@@ -61,7 +61,6 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        // dd($employee);
         return view('pages.employees.edit')->with('employee', $employee);
     }
 

@@ -62,9 +62,6 @@
                                             <li>
                                                 <a href="{{ route('employees.edit' ,$employee->id ) }}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                             </li>
-                                            <li>
-                                                <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Inactive</a>
-                                            </li>
                                         </ul>
                                         <div class="py-1">
                                             <form action="{{ route('employees.destroy',$employee->id) }}" method="POST">
