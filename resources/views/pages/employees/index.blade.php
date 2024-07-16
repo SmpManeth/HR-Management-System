@@ -12,18 +12,18 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 
-
-
                             <tr>
-                                <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">ID</th>
+                                <th scope="col" class="px-4 py-3">Full Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
+                                <th scope="col" class="px-4 py-3">Location</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
                                 <th scope="col" class="px-4 py-3">Department</th>
                                 <th scope="col" class="px-4 py-3">Designation</th>
                                 <th scope="col" class="px-4 py-3">Weekday Shift</th>
                                 <th scope="col" class="px-4 py-3">Weekend Shift</th>
-                                <th scope="col" class="px-4 py-3">Total leaves per Month</th>
-                                <th scope="col" class="px-4 py-3">Active</th>
+                                <th scope="col" class="px-4 py-3">leaves per Month</th>
+                                <th scope="col" class="px-4 py-3">Status</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -34,6 +34,8 @@
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
                                 <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
+                                <td class="px-4 py-3">{{ $employee->work_location}}</td>
                                 <td class="px-4 py-3">{{ $employee->email}}</td>
                                 <td class="px-4 py-3">{{ $employee->department}}</td>
                                 <td class="px-4 py-3">{{ $employee->employee_desgination}}</td>

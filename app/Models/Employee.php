@@ -20,6 +20,13 @@ class Employee extends Model
         'weekend_shift',
         'total_leaves_per_month',
         'status',
+        'Stage_name',
+        'dob',
+        'nic',
+        'Address',
+        'Contact_Number',
+        'work_location',
+        'joined_date',
     ];
 
     public function attendances()

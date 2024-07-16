@@ -13,16 +13,23 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('Employee_ID');
-            $table->string('First_Name');
-            $table->string('Last_Name');
-            $table->string('email');
-            $table->string('department');
-            $table->string('employee_desgination');
+            $table->string('Employee_ID')->required();
+            $table->string('First_Name')->required();
+            $table->string('Last_Name')->required();
+            $table->string('Stage_name')->required();
+            $table->string('email')->required();
+            $table->string('dob')->required();
+            $table->string('nic')->required();
+            $table->string('Address')->required();
+            $table->string('Contact_Number')->required();
+            $table->string('employee_desgination')->required();
+            $table->string('work_location')->required();
+            $table->string('joined_date')->required();
+            $table->string('department')->required();
             $table->string('weekday_shift')->nullable();
             $table->string('weekend_shift')->nullable();
-            $table->string('total_leaves_per_month')->nullable();
-            $table->string('status')->default('active');
+            $table->string('total_leaves_per_month')->required();
+            $table->string('status')->required();
             $table->timestamps();
         });
     }
