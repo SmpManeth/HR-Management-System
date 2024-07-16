@@ -35,7 +35,7 @@
                             <option disabled selected>Select Department</option>
                             <option value="Admin" {{ $employee->department == 'Admin' ? 'selected' : '' }}>Admin</option>
                             <option value="Management" {{ $employee->department == 'Management' ? 'selected' : '' }}>Management</option>
-                            <option value="Marketing" {{ $employee->department == 'Marketing' ? 'selected' : '' }}>Marketing</option>
+                            <option value="Web & Marketing" {{ $employee->department == 'Marketing' ? 'selected' : '' }}>Marketing</option>
                             <option value="IT" {{ $employee->department == 'IT' ? 'selected' : '' }}>IT</option>
                             <option value="Sales" {{ $employee->department == 'Sales' ? 'selected' : '' }}>Sales</option>
                             <option value="HR" {{ $employee->department == 'HR' ? 'selected' : '' }}>HR</option>

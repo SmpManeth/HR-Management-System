@@ -55,7 +55,7 @@
                             <option disabled selected>Select Department</option>
                             <option value="Admin">Admin</option>
                             <option value="Management">Management</option>
-                            <option value="Marketing">Marketing</option>
+                            <option value="Web & Marketing">Marketing</option>
                             <option value="IT">IT</option>
                             <option value="Sales">Sales</option>
                             <option value="HR">HR</option>
