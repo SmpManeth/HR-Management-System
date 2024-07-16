@@ -100,6 +100,7 @@
                             <option value="13:00 - 22:00">13:00 - 22:00</option>
                             <option value="14:00 - 23:00">14:00 - 23:00</option>
                             <option value="15:30 - 00:30">15:30 - 00:30</option>
+                            <option value="17:00 - 02:00">17:00 - 02:00</option>
                         </select>
                     </div>
                     <div>

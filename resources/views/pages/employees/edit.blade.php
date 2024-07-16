@@ -63,6 +63,7 @@
                             <option value="13:00 - 22:00" {{ $employee->weekend_shift == '13:00 - 22:00' ? 'selected' : '' }}>13:00 - 22:00</option>
                             <option value="14:00 - 23:00" {{ $employee->weekend_shift == '14:00 - 23:00' ? 'selected' : '' }}>14:00 - 23:00</option>
                             <option value="15:30 - 00:30" {{ $employee->weekend_shift == '15:30 - 00:30' ? 'selected' : '' }}>15:30 - 00:30</option>
+                            <option value="17:00 - 02:00" {{ $employee->weekend_shift == '17:00 - 02:00' ? 'selected' : '' }}>17:00 - 02:00</option>
                         </select>
                     </div>
                     <div>
