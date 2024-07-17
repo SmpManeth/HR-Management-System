@@ -35,7 +35,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: 162.240.172.35
+        server: 162.240.172.36
         username: git@attendance.blvs.uk
         password: Ovindu@12
         timeout_minutes: 5
