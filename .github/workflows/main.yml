@@ -36,7 +36,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
         server: 162.240.172.35
-        username: git@attendance.blvs.uk
+        username: test@attendance.blvs.uk
         password: Ovindu@12
         timeout_minutes: 5
         max_attempts: 5
