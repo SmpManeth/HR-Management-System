@@ -32,6 +32,14 @@ jobs:
         php artisan route:clear
         php artisan view:clear
 
+    - name: Check disk space on server
+      run: |
+        ftp -inv 162.240.172.35 <<EOF
+        user test@attendance.blvs.uk Ovindu@12
+        quote STAT
+        bye
+        EOF
+
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
