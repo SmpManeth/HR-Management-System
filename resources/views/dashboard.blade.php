@@ -55,7 +55,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked['hours']}}</td>
+                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Sales += $employee->planned_leaves;

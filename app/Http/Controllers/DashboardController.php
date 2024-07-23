@@ -16,6 +16,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+       
 
         if (isset($request->month)) {
             $year = Carbon::parse($request->month)->year;

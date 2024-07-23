@@ -11,11 +11,18 @@ class AttendenceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get employees with attendances 
-        $employees = Employee::with('attendances')->get();
-        return view('pages.attendance.index', compact('employees'));
+        
+        if ($request->user) {
+            $employees = Employee::with('attendances')->where('Employee_ID', $request->user)->get();
+        }
+        else{
+            $employees = Employee::with('attendances')->get();
+        }
+       
+        $allEmployees = Employee::all();
+        return view('pages.attendance.index', compact('employees' , 'allEmployees'));
     }
 
     /**

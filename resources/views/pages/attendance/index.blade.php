@@ -4,6 +4,22 @@
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto">
             <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Summary</h2>
+
+            <form action="{{ route('attendances.index') }}" method="GET" enctype="multipart/form-data">
+                <div class="filters py-4">
+                    <div>
+                        <label for="user" class="text-sm text-gray-700 pr-4">Filter By Employee : </label>
+                        <select name="user" id="user" class="border border-gray-300 rounded-md text-sm text-gray-500 p-2" onchange="this.form.submit()">
+                            <option value="">Select Employee</option>
+                            @foreach ($allEmployees as $employee)
+                            <option value="{{ $employee->Employee_ID }}">{{ $employee->Stage_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
@@ -36,11 +52,11 @@
                                 <td class="px-4 py-3">{{ $employee_attendances->shift}}</td>
                                 <td class="px-4 py-3">
                                     <?php
-                                    
-                                        $checkIn = new DateTime($employee_attendances->check_in);
-                                        $checkOut = new DateTime($employee_attendances->check_out);
-                                        $hoursWorked = $checkIn->diff($checkOut)->format('%h:%i');
-                                        echo $hoursWorked;
+
+                                    $checkIn = new DateTime($employee_attendances->check_in);
+                                    $checkOut = new DateTime($employee_attendances->check_out);
+                                    $hoursWorked = $checkIn->diff($checkOut)->format('%h:%i');
+                                    echo $hoursWorked;
                                     ?>
                                 </td>
                                 <td class="px-4 py-3">{{ $employee_attendances->status}}</td>
