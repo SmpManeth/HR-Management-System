@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendence;
-use App\Http\Requests\StoreAttendenceRequest;
-use App\Http\Requests\UpdateAttendenceRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use Illuminate\Queue\Middleware\ThrottlesExceptions;
 
 class AttendenceController extends Controller
 {
@@ -70,8 +67,7 @@ class AttendenceController extends Controller
             $status = 'Late Coming';
         } else if ($check_in == null) {
             $status =  $validated['status'];
-        }
-        else{
+        } else {
             $status = 'Present';
         }
         $validated['status'] = $status;
@@ -92,24 +88,71 @@ class AttendenceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Attendence $attendence)
+    public function edit(Request $request, $attendence_id)
     {
-        //
+        $attendence = Attendence::with('employee')->find($attendence_id);
+        // dd($attendence);
+        return view('pages.attendance.edit', compact('attendence'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAttendenceRequest $request, Attendence $attendence)
+    public function update(Request $request, Attendence $attendence)
     {
-        //
+        $validated = $request->validate([
+            'id' => 'required',
+            'date' => 'required',
+            'employee_id' => 'required',
+            'check_in' => 'nullable', // 'check_in' => 'required|date_format:H:i:s',
+            'check_out' => 'nullable',
+            'status' => 'nullable'
+        ]);
+
+        // Fget the selected date and check whether its a weekday or a week end. need to check whether employee is late or not by comparing the check_in time with the shift time
+        $selectedDay = date('l', strtotime($request->date));
+        $employee_id = $request->employee_id;
+        $employee = Employee::find($employee_id);
+
+
+        if ($selectedDay == 'Saturday' || $selectedDay == 'Sunday') {
+            $shift = $employee->weekend_shift;
+        } else {
+            $shift = $employee->weekday_shift;
+        }
+
+
+
+        $check_in = $request->check_in;
+        $check_out = $request->check_out;
+
+        $shift_time = array_map('trim', explode('-', $shift));
+
+        //check if the employee is late or not by comparing the check_in time with the shift time[0] and checkout with shift time[1]
+        $status = '';
+        if ($check_in > $shift_time[0]) {
+            $status = 'Late Coming';
+        } else if ($check_in == null) {
+            $status =  $validated['status'];
+        } else {
+            $status = 'Present';
+        }
+        $validated['status'] = $status;
+        $validated['shift'] = $shift;
+        $attendence = Attendence::find($request->id);
+        $attendence->update($validated);
+
+        return redirect()->route('employees.index')->with('success', 'Attendence Marked Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Attendence $attendence)
+    public function destroy(Request $request , $id)
     {
-        //
+        $Attendence = Attendence::find($id);
+        $Attendence->delete();
+
+        return back()->with('success', 'Attendence deleted successfully.');
     }
 }

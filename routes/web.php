@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendances/mark/{employee_id}', [AttendenceController::class, 'create'])->name('attendances.create');
     Route::post('/attendances/mark', [AttendenceController::class, 'store'])->name('attendances.store');
     Route::get('/attendances/{attendance}', [AttendenceController::class, 'show'])->name('attendances.show');
-    Route::get('/attendances/{attendance}/edit', [AttendenceController::class, 'edit'])->name('attendances.edit');
-    Route::patch('/attendances/{attendance}', [AttendenceController::class, 'update'])->name('attendances.update');
+    Route::get('/attendances/edit/{attendance_id}', [AttendenceController::class, 'edit'])->name('attendances.edit');
+    Route::put('/attendances/{attendance_id}', [AttendenceController::class, 'update'])->name('attendances.update');
     Route::delete('/attendances/{attendance}', [AttendenceController::class, 'destroy'])->name('attendances.destroy');
 
     
