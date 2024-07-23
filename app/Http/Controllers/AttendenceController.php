@@ -130,13 +130,16 @@ class AttendenceController extends Controller
 
         //check if the employee is late or not by comparing the check_in time with the shift time[0] and checkout with shift time[1]
         $status = '';
+       
+        
         if ($check_in > $shift_time[0]) {
             $status = 'Late Coming';
-        } else if ($check_in == null) {
+        } else if ($check_in == null && $check_out == null) {
             $status =  $validated['status'];
         } else {
             $status = 'Present';
         }
+        dd($status);
         $validated['status'] = $status;
         $validated['shift'] = $shift;
         $attendence = Attendence::find($request->id);
