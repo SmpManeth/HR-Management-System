@@ -14,7 +14,7 @@
                             <tr>
                                 <th scope="col" class="px-4 py-3">Date</th>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name </th>
                                 <th scope="col" class="px-4 py-3">Check In</th>
                                 <th scope="col" class="px-4 py-3">Check Out</th>
                                 <th scope="col" class="px-4 py-3">Shift</th>
@@ -30,7 +30,7 @@
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee_attendances->date}}</th>
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                 <td class="px-4 py-3">{{ $employee_attendances->check_in}}</td>
                                 <td class="px-4 py-3">{{ $employee_attendances->check_out}}</td>
                                 <td class="px-4 py-3">{{ $employee_attendances->shift}}</td>
