@@ -139,7 +139,7 @@ class AttendenceController extends Controller
         } else {
             $status = 'Present';
         }
-        dd($status);
+        // dd($status);
         $validated['status'] = $status;
         $validated['shift'] = $shift;
         $attendence = Attendence::find($request->id);

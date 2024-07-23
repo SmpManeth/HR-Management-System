@@ -55,7 +55,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{ $employee->total_hours_worked['hours']}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Sales += $employee->planned_leaves;
@@ -75,7 +75,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Sales}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Sales}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Sales * 3600)}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -142,7 +142,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Admin}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Admin}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Admin}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Admin}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Admin * 3600)}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -209,7 +209,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Marketing}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Marketing}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Marketing}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Marketing * 3600)}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -276,7 +276,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_IT}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_IT}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_IT}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_IT}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_IT * 3600)}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -343,7 +343,74 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Management}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Management * 3600)}}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- PH -->
+     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+        <div class="mx-auto">
+            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Philiphines Summary</h2>
+            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                <div class="overflow-x-auto pb-[160px]">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Employee ID</th>
+                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Planned Leave</th>
+                                <th scope="col" class="px-4 py-3">Unplanned Leave</th>
+                                <th scope="col" class="px-4 py-3">Sick Leave</th>
+                                <th scope="col" class="px-4 py-3">Half Days</th>
+                                <th scope="col" class="px-4 py-3">Late Comings</th>
+                                <th scope="col" class="px-4 py-3">No. Of Hours Worked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                                $planned_leaves_Management = 0;
+                                $unplanned_leaves_Management = 0;
+                                $sick_leaves_Management = 0;
+                                $halfdays_Management = 0;
+                                $late_comings_Management = 0;
+                                $total_hours_worked_PHt = 0;
+                            @endphp
+                            @foreach ($employees as $employee)
+                                @if ($employee->department == 'PH-Team')
+                                    <tr class="border-b dark:border-gray-700">
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
+                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
+                                        <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
+                                        <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
+                                        <td class="px-4 py-3">{{ $employee->halfdays}}</td>
+                                        <td class="px-4 py-3">{{ $employee->late_comings}}</td>
+                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                    </tr>
+                                    @php
+                                        $planned_leaves_Management += $employee->planned_leaves;
+                                        $unplanned_leaves_Management += $employee->unplanned_leaves;
+                                        $sick_leaves_Management += $employee->sick_leaves;
+                                        $halfdays_Management += $employee->halfdays;
+                                        $late_comings_Management += $employee->late_comings;
+                                        $total_hours_worked_PHt += $employee->total_hours_worked;
+                                    @endphp
+                                @endif
+                            @endforeach
+                            <tr>
+                                <td></td>
+                                <td class="px-4 py-3"><strong>Total</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $planned_leaves_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $unplanned_leaves_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $sick_leaves_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $halfdays_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $late_comings_Management}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_PHt * 3600)}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
