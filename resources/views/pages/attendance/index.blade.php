@@ -50,15 +50,20 @@
                                 <td class="px-4 py-3">{{ $employee_attendances->check_in}}</td>
                                 <td class="px-4 py-3">{{ $employee_attendances->check_out}}</td>
                                 <td class="px-4 py-3">{{ $employee_attendances->shift}}</td>
+                                
                                 <td class="px-4 py-3">
                                     <?php
-
                                     $checkIn = new DateTime($employee_attendances->check_in);
                                     $checkOut = new DateTime($employee_attendances->check_out);
+                                    if ($checkOut < $checkIn) {
+                                        $checkOut->modify('+1 day');
+                                    }
                                     $hoursWorked = $checkIn->diff($checkOut)->format('%h:%i');
                                     echo $hoursWorked;
+
                                     ?>
                                 </td>
+
                                 <td class="px-4 py-3">{{ $employee_attendances->status}}</td>
                                 <td class="px-4 py-3 flex items-center justify-center">
                                     <button id="{{ $employee_attendances->id}}-dropdown-button" data-dropdown-toggle="{{ $employee_attendances->id}}-dropdown" class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
