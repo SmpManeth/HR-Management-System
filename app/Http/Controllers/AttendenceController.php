@@ -154,7 +154,7 @@ class AttendenceController extends Controller
         $attendence = Attendence::find($request->id);
         $attendence->update($validated);
 
-        return redirect()->route('employees.index')->with('success', 'Attendence Marked Successfully');
+         return back()->with('attendence', $attendence);
     }
 
     /**
