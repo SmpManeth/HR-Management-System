@@ -13,16 +13,18 @@ class AttendenceController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         if ($request->user) {
-            $employees = Employee::with('attendances')->where('Employee_ID', $request->user)->get();
+            
+            $attendances = Attendence::with(['employee' => function ($query) use ($request) {
+                $query->where('Employee_ID', $request->user);
+            }])->orderBy('date', 'asc')->get();
+        } else {
+
+            $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
         }
-        else{
-            $employees = Employee::with('attendances')->get();
-        }
-       
         $allEmployees = Employee::all();
-        return view('pages.attendance.index', compact('employees' , 'allEmployees'));
+        return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
 
     /**
@@ -137,8 +139,8 @@ class AttendenceController extends Controller
 
         //check if the employee is late or not by comparing the check_in time with the shift time[0] and checkout with shift time[1]
         $status = '';
-       
-        
+
+
         if ($check_in > $shift_time[0]) {
             $status = 'Late Coming';
         } else if ($check_in == null && $check_out == null) {
@@ -158,7 +160,7 @@ class AttendenceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request , $id)
+    public function destroy(Request $request, $id)
     {
         $Attendence = Attendence::find($id);
         $Attendence->delete();
