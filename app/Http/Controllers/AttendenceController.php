@@ -16,8 +16,7 @@ class AttendenceController extends Controller
 
         if ($request->user) {
             $attendances = Attendence::with('employee')
-            ->where('employee_id', $request->user)->orderBy('date', 'asc')->get();
-        
+                ->where('employee_id', $request->user)->orderBy('date', 'asc')->get();
         } else {
 
             $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
@@ -154,7 +153,9 @@ class AttendenceController extends Controller
         $attendence = Attendence::find($request->id);
         $attendence->update($validated);
 
-         return back()->with('attendence', $attendence);
+        $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
+        $allEmployees = Employee::all();
+        return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
 
     /**
