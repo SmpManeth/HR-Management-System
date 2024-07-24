@@ -55,7 +55,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Sales += $employee->planned_leaves;
@@ -122,7 +122,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Admin += $employee->planned_leaves;
@@ -189,7 +189,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Marketing += $employee->planned_leaves;
@@ -256,7 +256,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_IT += $employee->planned_leaves;
@@ -323,7 +323,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{  gmdate('H:i', $employee->total_hours_worked * 3600) }}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Management += $employee->planned_leaves;
@@ -355,7 +355,7 @@
      <!-- PH -->
      <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto">
-            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Philiphines Summary</h2>
+            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Philippine Summary</h2>
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="overflow-x-auto pb-[160px]">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -390,7 +390,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                        <td class="px-4 py-3">{{  gmdate('H:i', $employee->total_hours_worked * 3600) }}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Management += $employee->planned_leaves;
