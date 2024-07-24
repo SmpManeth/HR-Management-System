@@ -15,14 +15,14 @@ class AttendenceController extends Controller
     {
 
         if ($request->user) {
-            
-            $attendances = Attendence::with(['employee' => function ($query) use ($request) {
-                $query->where('Employee_ID', $request->user);
-            }])->orderBy('date', 'asc')->get();
+            $attendances = Attendence::with('employee')
+            ->where('employee_id', $request->user)->orderBy('date', 'asc')->get();
+        
         } else {
 
             $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
         }
+
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }

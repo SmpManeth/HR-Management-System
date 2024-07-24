@@ -11,8 +11,9 @@
                         <label for="user" class="text-sm text-gray-700 pr-4">Filter By Employee : </label>
                         <select name="user" id="user" class="border border-gray-300 rounded-md text-sm text-gray-500 p-2" onchange="this.form.submit()">
                             <option value="">Select Employee</option>
+                            <option value="">All</option>
                             @foreach ($allEmployees as $employee)
-                            <option value="{{ $employee->Employee_ID }}">{{ $employee->Stage_name }}</option>
+                            <option value="{{ $employee->id }}">{{ $employee->Stage_name }}</option>
                             @endforeach
                         </select>
                     </div>
