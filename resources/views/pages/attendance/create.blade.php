@@ -52,6 +52,7 @@
                             <option value="Planned Leave" {{ old('status') == 'Planned Leave' ? 'selected' : '' }}>Planned Leave</option>
                             <option value="Unplanned Leave" {{ old('status') == 'Unplanned Leave' ? 'selected' : '' }}>Unplanned Leave</option>
                             <option value="Sick Leave" {{ old('status') == 'Sick Leave' ? 'selected' : '' }}>Sick Leave</option>
+                            <option value="OFF" {{ old('status') == 'OFF' ? 'selected' : '' }}>OFF Day</option>
                         </select>
                         @error('status')
                         <p class="text-red-500 text-sm">{{ $message }}</p>

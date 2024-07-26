@@ -95,6 +95,7 @@
                             <option value="15:30 - 00:30">15:30 - 00:30</option>
                             <option value="17:00 - 02:00">17:00 - 02:00</option>
                             <option value="18:00 - 03:00">18:00 - 03:00</option>
+                            <option value="OFF">OFF</option>
 
                         </select>
                     </div>
@@ -110,6 +111,7 @@
                             <option value="15:30 - 00:30">15:30 - 00:30</option>
                             <option value="17:00 - 02:00">17:00 - 02:00</option>
                             <option value="18:00 - 03:00">18:00 - 03:00</option>
+                            <option value="OFF">OFF</option>
                         </select>
                     </div>
                     <div>

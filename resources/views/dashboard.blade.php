@@ -27,7 +27,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -49,7 +49,7 @@
                                 @if ($employee->department == 'Sales')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
@@ -94,7 +94,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -116,7 +116,7 @@
                                 @if ($employee->department == 'Admin')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
@@ -161,7 +161,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -183,7 +183,7 @@
                                 @if ($employee->department == 'Marketing')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
@@ -228,7 +228,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -250,7 +250,7 @@
                                 @if ($employee->department == 'IT')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
@@ -295,7 +295,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -317,7 +317,7 @@
                                 @if ($employee->department == 'Management')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
@@ -362,7 +362,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Employee ID</th>
-                                <th scope="col" class="px-4 py-3">Employee Name</th>
+                                <th scope="col" class="px-4 py-3">Stage Name</th>
                                 <th scope="col" class="px-4 py-3">Planned Leave</th>
                                 <th scope="col" class="px-4 py-3">Unplanned Leave</th>
                                 <th scope="col" class="px-4 py-3">Sick Leave</th>
@@ -384,7 +384,7 @@
                                 @if ($employee->department == 'PH-Team')
                                     <tr class="border-b dark:border-gray-700">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                        <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
+                                        <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
                                         <td class="px-4 py-3">{{ $employee->planned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->unplanned_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>

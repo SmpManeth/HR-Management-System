@@ -59,6 +59,7 @@
                             <option value="15:30 - 00:30" {{ $employee->weekday_shift == '15:30 - 00:30' ? 'selected' : '' }}>15:30 - 00:30</option>
                             <option value="17:00 - 02:00" {{ $employee->weekday_shift == '17:00 - 02:00' ? 'selected' : '' }}>17:00 - 02:00</option>
                             <option value="18:00 - 03:00" {{ $employee->weekday_shift == '18:00 - 03:00' ? 'selected' : '' }}>18:00 - 03:00</option>
+                            <option value="OFF" {{ $employee->weekday_shift == 'OFF' ? 'selected' : '' }}>OFF</option>
                         </select>
                     </div>
                     <div>
@@ -72,6 +73,7 @@
                             <option value="15:30 - 00:30" {{ $employee->weekend_shift == '15:30 - 00:30' ? 'selected' : '' }}>15:30 - 00:30</option>
                             <option value="17:00 - 02:00" {{ $employee->weekend_shift == '17:00 - 02:00' ? 'selected' : '' }}>17:00 - 02:00</option>
                             <option value="18:00 - 03:00" {{ $employee->weekend_shift == '18:00 - 03:00' ? 'selected' : '' }}>18:00 - 03:00</option>
+                            <option value="OFF" {{ $employee->weekend_shift == 'OFF' ? 'selected' : '' }}>OFF</option>
                         </select>
                     </div>
                     <div>

@@ -52,6 +52,7 @@
                             <option value="Planned Leave" {{ old('status', $attendence->status) == 'Planned Leave' ? 'selected' : '' }}>Planned Leave</option>
                             <option value="Unplanned Leave" {{ old('status', $attendence->status) == 'Unplanned Leave' ? 'selected' : '' }}>Unplanned Leave</option>
                             <option value="Sick Leave" {{ old('status', $attendence->status) == 'Sick Leave' ? 'selected' : '' }}>Sick Leave</option>
+                            <option value="OFF" {{ $attendence->status == 'OFF' ? 'selected' : '' }}>OFF Day</option>
                         </select>
                         @error('status')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
