@@ -40,6 +40,7 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
 
         $validated = $request->validate([
             'employee_id' => 'required',
@@ -73,10 +74,12 @@ class AttendenceController extends Controller
         $status = '';
         if ($check_in > $shift_time[0]) {
             $status = 'Late Coming';
-        } else if ($check_in == null) {
-            $status =  $validated['status'];
         } else {
-            $status = 'Present';
+            if ($check_in <= $shift_time[0] && $check_out >= $shift_time[1]) {
+                $status = 'Present';
+            } else {
+                $status = $validated['status'];
+            }
         }
         $validated['status'] = $status;
         $validated['shift'] = $shift;

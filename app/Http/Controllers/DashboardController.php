@@ -43,7 +43,7 @@ class DashboardController extends Controller
             $employee->late_comings = $employee->attendances->where('status', 'Late Coming')->count();
 
             // Calculating total hours worked for 'Present' and 'Late Coming' statuses
-            $employee->total_hours_worked = $employee->attendances->whereIn('status', ['Present', 'Late Coming'])->reduce(function ($carry, $attendance) {
+            $employee->total_hours_worked = $employee->attendances->reduce(function ($carry, $attendance) {
                 if ($attendance->check_in && $attendance->check_out) {
                     $checkIn = Carbon::parse($attendance->check_in);
                     $checkOut = Carbon::parse($attendance->check_out);

@@ -55,7 +55,7 @@
                                         <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                         <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                         <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                        <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
+                                        <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
                                     </tr>
                                     @php
                                         $planned_leaves_Sales += $employee->planned_leaves;
@@ -75,7 +75,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Sales}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Sales * 3600)}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Sales }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
