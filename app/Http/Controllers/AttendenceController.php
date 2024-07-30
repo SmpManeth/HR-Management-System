@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendence;
 use App\Models\Employee;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendenceController extends Controller
@@ -21,6 +22,66 @@ class AttendenceController extends Controller
 
             $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
         }
+
+        $allEmployees = Employee::all();
+        return view('pages.attendance.index', compact('allEmployees', 'attendances'));
+    }
+
+    public function generate(Request $request)
+    {
+        // dd($request->all());    
+
+
+        $currentMonth = Carbon::now()->format('Y-m');
+        $currentDate = Carbon::now()->format('Y-m-d');
+
+        // Retrieve all employee IDs
+        $employeeIds = Employee::pluck('id')->toArray();
+
+        $allDays = [];
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now();
+
+        for ($date = $startOfMonth; $date->lte($endOfMonth); $date->addDay()) {
+            $allDays[] = $date->format('Y-m-d');
+        }
+
+        $newAttendanceRecords = [];
+
+
+        foreach ($employeeIds as $employeeId) {
+            // Retrieve attendance data for the current month for the specific employee
+            $attendanceData = Attendence::where('employee_id', $employeeId)
+                ->where('date', 'like', "$currentMonth%")
+                ->pluck('date')
+                ->toArray();
+
+
+            // Check which days are missing for the current employee
+            $missingDays = array_diff($allDays, $attendanceData);
+
+            // Mark all missing days up to date as absent for the current employee
+            foreach ($missingDays as $day) {
+                if (Carbon::parse($day)->lte($currentDate)) {
+                    $newAttendanceRecords[] = [
+                        'employee_id' => $employeeId,
+                        'date' => $day,
+                        'check_in' => null,
+                        'check_out' => null,
+                        'status' => 'absent',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ];
+                }
+            }
+        }
+
+        // Insert missing attendance records
+        if (!empty($newAttendanceRecords)) {
+            Attendence::insert($newAttendanceRecords);
+        }
+
+        $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
@@ -76,11 +137,11 @@ class AttendenceController extends Controller
             $status = 'Late Coming';
         } else {
             if ($check_in == null && $check_out == null) {
-            $status = $validated['status'];
+                $status = $validated['status'];
             } else if ($check_in <= $shift_time[0] && $check_out >= $shift_time[1]) {
-            $status = 'Present';
+                $status = 'Present';
             } else {
-            $status = $validated['status'];
+                $status = $validated['status'];
             }
         }
         $validated['status'] = $status;
