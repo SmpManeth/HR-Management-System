@@ -75,10 +75,12 @@ class AttendenceController extends Controller
         if ($check_in > $shift_time[0]) {
             $status = 'Late Coming';
         } else {
-            if ($check_in <= $shift_time[0] && $check_out >= $shift_time[1]) {
-                $status = 'Present';
+            if ($check_in == null && $check_out == null) {
+            $status = $validated['status'];
+            } else if ($check_in <= $shift_time[0] && $check_out >= $shift_time[1]) {
+            $status = 'Present';
             } else {
-                $status = $validated['status'];
+            $status = $validated['status'];
             }
         }
         $validated['status'] = $status;
