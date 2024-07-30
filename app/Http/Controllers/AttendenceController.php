@@ -15,13 +15,19 @@ class AttendenceController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->user) {
-            $attendances = Attendence::with('employee')
-                ->where('employee_id', $request->user)->orderBy('date', 'asc')->get();
-        } else {
 
-            $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
+        $attendances = Attendence::with('employee')->orderBy('date', 'asc');
+
+        if (!empty($request->user) && !empty($request->date)) {
+            $attendances->where('employee_id', $request->user)
+                ->where('date', $request->date);
+        } elseif (!empty($request->user)) {
+            $attendances->where('employee_id', $request->user);
+        } elseif (!empty($request->date)) {
+            $attendances->where('date', $request->date);
         }
+
+        $attendances = $attendances->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));

@@ -7,10 +7,10 @@
 
             <div class="flex border items-center">
                 <form action="{{ route('attendances.index') }}" method="GET" enctype="multipart/form-data">
-                    <div class="filters py-4">
+                    <div class="filters py-4 flex">
                         <div>
                             <label for="user" class="text-sm text-gray-700 pr-4">Filter By Employee : </label>
-                            <select name="user" id="user" class="border border-gray-300 rounded-md text-sm text-gray-500 p-2" onchange="this.form.submit()">
+                            <select name="user" id="user" class="border border-gray-300 rounded-md text-sm text-gray-500 p-2">
                                 <option value="">Select Employee</option>
                                 <option value="">All</option>
                                 @foreach ($allEmployees as $employee)
@@ -19,6 +19,16 @@
                             </select>
                         </div>
 
+                        <div class="ml-4 flex items-center">
+                            <label for="user" class="text-sm text-gray-700 pr-4">Filter By Date : </label>
+                            <div>
+                                <input type="date" name="date" id="date" class="px-4  text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('date') }}">
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class=" ml-4  focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Filter</button>
+                        </div>
                     </div>
                 </form>
 
