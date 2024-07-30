@@ -5,7 +5,7 @@
         <div class="mx-auto">
             <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Summary</h2>
 
-            <div class="flex border items-center">
+            <div class="flex items-center">
                 <form action="{{ route('attendances.index') }}" method="GET" enctype="multipart/form-data">
                     <div class="filters py-4 flex">
                         <div>
