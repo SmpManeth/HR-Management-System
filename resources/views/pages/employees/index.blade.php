@@ -1,7 +1,8 @@
 <x-app-layout>
-
-
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+
+        <x-session-message :message="['success' => session('success'), 'error' => session('error')]" />
+
         <div class="mx-auto">
             <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">All Employees</h2>
             <!-- Start coding here -->
@@ -43,12 +44,8 @@
                                 <td class="px-4 py-3">{{ $employee->weekend_shift}}</td>
                                 <td class="px-4 py-3">{{ $employee->total_leaves_per_month}}</td>
                                 <td class="px-4 py-3 whitespace-nowrap">
-                                    <div class="w-fit @if ($employee->status == "active")bg-green-100 text-green-800 @else bg-red-100 text-red-800 @endif text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-                                        @if ($employee->status == "active")
-                                        Active
-                                        @else
-                                        Inactive
-                                        @endif
+                                    <div class="w-fit bg-{{ $employee->status == 'active' ? 'green' : 'red' }}-100 text-{{ $employee->status == 'active' ? 'green' : 'red' }}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                                        {{ $employee->status == 'active' ? 'Active' : 'Inactive' }}
                                     </div>
                                 </td>
 

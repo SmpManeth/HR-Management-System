@@ -98,6 +98,7 @@ class EmployeeController extends Controller
             'status' => 'required',
         ]);
 
+
         $employee->update($validatedData);
         return redirect()->route('employees.index')->with('success', 'Employee Update successfully.');
     }
