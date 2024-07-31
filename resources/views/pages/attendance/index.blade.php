@@ -2,6 +2,8 @@
 
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+    <x-session-message :message="['success' => session('success'), 'error' => session('error')]" />
+
         <div class="mx-auto">
             <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Summary</h2>
 
