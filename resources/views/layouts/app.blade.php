@@ -12,8 +12,10 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- blowbite css  -->
+    <!-- Flowbite CSS -->
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -36,8 +38,39 @@
         </main>
 
     </div>
-    <!-- flowbite css  -->
+    <!-- Flowbite JS -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+
+    <script>
+        let logoutTimer;
+        const logoutAfter = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+        function resetLogoutTimer() {
+            clearTimeout(logoutTimer);
+            logoutTimer = setTimeout(logoutUser, logoutAfter);
+        }
+
+        function logoutUser() {
+            $.ajax({
+                url: '{{ route('logout') }}',
+                type: 'POST',
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function() {
+                    window.location.href = '{{ route('login') }}';
+                },
+                error: function() {
+                    window.location.href = '{{ route('login') }}';
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $(document).on('mousemove keydown click', resetLogoutTimer);
+            resetLogoutTimer();
+        });
+    </script>
 </body>
 
 </html>
