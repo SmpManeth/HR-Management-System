@@ -16,7 +16,7 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-       
+
 
         if (isset($request->month)) {
             $year = Carbon::parse($request->month)->year;
@@ -28,38 +28,71 @@ class DashboardController extends Controller
             }])->get();
             // dd( $employees);
         } else {
-    
+
             $employees = Employee::with('attendances')->get();
         }
 
 
 
-        //get all the unplaneed leaves , plannned Leaves ,Sick Leaves , Halfdays , an late Comings for each employee from attendances
-        $employees->map(function ($employee) {
-            $employee->unplanned_leaves = $employee->attendances->where('status', 'Unplanned Leave')->count();
-            $employee->planned_leaves = $employee->attendances->where('status', 'Planned Leave')->count();
-            $employee->sick_leaves = $employee->attendances->where('status', 'Sick Leave')->count();
-            $employee->halfdays = $employee->attendances->where('status', 'Half Day')->count();
-            $employee->late_comings = $employee->attendances->where('status', 'Late Coming')->count();
-
-            // Calculating total hours worked for 'Present' and 'Late Coming' statuses
-            $employee->total_hours_worked = $employee->attendances->reduce(function ($carry, $attendance) {
+        $employees = $employees->map(function ($employee) {
+            $statuses = ['Unplanned Leave', 'Planned Leave', 'Sick Leave', 'Half Day', 'Late Coming'];
+            
+            foreach ($statuses as $status) {
+                $key = strtolower(str_replace(' ', '_', $status)) . 's';
+                $employee->$key = $employee->attendances->where('status', $status)->count();
+            }
+        
+            // Calculate total minutes worked
+            $totalMinutes = $employee->attendances->reduce(function ($carry, $attendance) {
                 if ($attendance->check_in && $attendance->check_out) {
                     $checkIn = Carbon::parse($attendance->check_in);
                     $checkOut = Carbon::parse($attendance->check_out);
-                    $hours = $checkIn->diffInHours($checkOut);
-                    return $carry + $hours;
+        
+                    // Check if the check-out time is on the next day
+                    if ($checkOut->lt($checkIn)) {
+                        $checkOut->addDay(); // Add one day to the check-out time
+                    }
+        
+                    $minutes = $checkIn->diffInMinutes($checkOut);
+                    return $carry + $minutes;
                 }
                 return $carry;
-            }, 0); // Start reducing with an initial value of 0
-
+            }, 0);
+        
+            // Format total minutes to HH:MM
+            $employee->total_hours_worked_formatted = sprintf('%02d:%02d', intdiv($totalMinutes, 60), $totalMinutes % 60);
+            $employee->total_minutes_worked = $totalMinutes; // Save total minutes worked for each employee
+        
             return $employee;
         });
+        
+        // Function to convert minutes to formatted HH:MM
+        function formatMinutesToHHMM($minutes) {
+            return sprintf('%02d:%02d', intdiv($minutes, 60), $minutes % 60);
+        }
+        
+        // Calculate total worked minutes and format for each department
+        $departments = ['Admin', 'Management', 'HR', 'IT', 'Web & Marketing', 'Sales', 'PH-Team'];
+        $department_worked_mins = [];
+        
+        foreach ($departments as $department) {
+            $total_minutes = $employees->where('department', $department)->sum('total_minutes_worked');
+            $department_worked_mins[$department] = formatMinutesToHHMM($total_minutes);
+        }
+        
+        // Access formatted total worked hours and minutes for each department
+        $admin_total_worked_mins_formatted = $department_worked_mins['Admin'];
+        $management_total_worked_mins_formatted = $department_worked_mins['Management'];
+        $hr_total_worked_mins_formatted = $department_worked_mins['HR'];
+        $it_total_worked_mins_formatted = $department_worked_mins['IT'];
+        $web_and_marketing_total_worked_mins_formatted = $department_worked_mins['Web & Marketing'];
+        $sales_total_worked_mins_formatted = $department_worked_mins['Sales'];
+        $ph_team_total_worked_mins_formatted = $department_worked_mins['PH-Team'];
 
 
+        // dd($employees[0]->total_hours_worked);
 
-
-        return view('dashboard', compact('employees'));
+        return view('dashboard', compact('employees', 'admin_total_worked_mins_formatted' , 'management_total_worked_mins_formatted' , 'hr_total_worked_mins_formatted' , 'it_total_worked_mins_formatted' , 'web_and_marketing_total_worked_mins_formatted' , 'sales_total_worked_mins_formatted' , 'ph_team_total_worked_mins_formatted'));
     }
 
     /**

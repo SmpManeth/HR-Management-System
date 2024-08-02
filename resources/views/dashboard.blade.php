@@ -43,7 +43,6 @@
                             $sick_leaves_Sales = 0;
                             $halfdays_Sales = 0;
                             $late_comings_Sales = 0;
-                            $total_hours_worked_Sales = 0;
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'Sales')
@@ -55,7 +54,7 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{ $employee->total_hours_worked}}</td>
+                                <td class="px-4 py-3">{{ $employee->total_hours_worked_formatted}}</td>
                             </tr>
                             @php
                             $planned_leaves_Sales += $employee->planned_leaves;
@@ -63,7 +62,6 @@
                             $sick_leaves_Sales += $employee->sick_leaves;
                             $halfdays_Sales += $employee->halfdays;
                             $late_comings_Sales += $employee->late_comings;
-                            $total_hours_worked_Sales += $employee->total_hours_worked;
                             @endphp
                             @endif
                             @endforeach
@@ -75,7 +73,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Sales}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Sales}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ $total_hours_worked_Sales }}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $sales_total_worked_mins_formatted }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,7 +108,6 @@
                             $sick_leaves_Admin = 0;
                             $halfdays_Admin = 0;
                             $late_comings_Admin = 0;
-                            $total_hours_worked_Admin = 0;
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'Admin')
@@ -122,7 +119,7 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
+                                <td class="px-4 py-3">{{ $employee->total_hours_worked_formatted }}</td>
                             </tr>
                             @php
                             $planned_leaves_Admin += $employee->planned_leaves;
@@ -130,7 +127,6 @@
                             $sick_leaves_Admin += $employee->sick_leaves;
                             $halfdays_Admin += $employee->halfdays;
                             $late_comings_Admin += $employee->late_comings;
-                            $total_hours_worked_Admin += $employee->total_hours_worked;
                             @endphp
                             @endif
                             @endforeach
@@ -142,7 +138,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Admin}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Admin}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Admin}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Admin * 3600)}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $admin_total_worked_mins_formatted }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -154,7 +150,7 @@
     <!-- Marketing -->
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
         <div class="mx-auto">
-            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Marketing Summary</h2>
+            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Web & Marketing Summary</h2>
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                 <div class="overflow-x-auto pb-[160px]">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -172,14 +168,11 @@
                         </thead>
                         <tbody>
                             @php
-
                             $planned_leaves_Marketing = 0;
                             $unplanned_leaves_Marketing = 0;
                             $sick_leaves_Marketing = 0;
                             $halfdays_Marketing = 0;
                             $late_comings_Marketing = 0;
-                            $total_hours_worked_Marketing = 0;
-
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'Web & Marketing')
@@ -189,7 +182,6 @@
                             $sick_leaves_Marketing += $employee->sick_leaves;
                             $halfdays_Marketing += $employee->halfdays;
                             $late_comings_Marketing += $employee->late_comings;
-                            $total_hours_worked_Marketing += $employee->total_hours_worked;
                             @endphp
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
@@ -199,11 +191,21 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{  $total_hours_worked_Marketing}}</td>
+                                <td class="px-4 py-3">{{  $employee->total_hours_worked_formatted}}</td>
                             </tr>
 
                             @endif
                             @endforeach
+                            <tr>
+                                <td></td>
+                                <td class="px-4 py-3"><strong>Total</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $planned_leaves_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $unplanned_leaves_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $sick_leaves_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $halfdays_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $late_comings_Marketing}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $web_and_marketing_total_worked_mins_formatted }}</strong></td>
+                            </tr>
                            
                         </tbody>
                     </table>
@@ -238,7 +240,6 @@
                             $sick_leaves_IT = 0;
                             $halfdays_IT = 0;
                             $late_comings_IT = 0;
-                            $total_hours_worked_IT = 0;
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'IT')
@@ -250,7 +251,7 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600)}}</td>
+                                <td class="px-4 py-3">{{ $employee->total_hours_worked_formatted}}</td>
                             </tr>
                             @php
                             $planned_leaves_IT += $employee->planned_leaves;
@@ -258,7 +259,6 @@
                             $sick_leaves_IT += $employee->sick_leaves;
                             $halfdays_IT += $employee->halfdays;
                             $late_comings_IT += $employee->late_comings;
-                            $total_hours_worked_IT += $employee->total_hours_worked;
                             @endphp
                             @endif
                             @endforeach
@@ -270,7 +270,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_IT}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_IT}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_IT}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_IT * 3600)}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $it_total_worked_mins_formatted }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -305,7 +305,6 @@
                             $sick_leaves_Management = 0;
                             $halfdays_Management = 0;
                             $late_comings_Management = 0;
-                            $total_hours_worked_Management = 0;
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'Management')
@@ -317,7 +316,7 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600) }}</td>
+                                <td class="px-4 py-3">{{ $employee->total_hours_worked_formatted }}</td>
                             </tr>
                             @php
                             $planned_leaves_Management += $employee->planned_leaves;
@@ -325,7 +324,6 @@
                             $sick_leaves_Management += $employee->sick_leaves;
                             $halfdays_Management += $employee->halfdays;
                             $late_comings_Management += $employee->late_comings;
-                            $total_hours_worked_Management += $employee->total_hours_worked;
                             @endphp
                             @endif
                             @endforeach
@@ -337,7 +335,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Management}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_Management * 3600)}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{$management_total_worked_mins_formatted }}</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -372,7 +370,6 @@
                             $sick_leaves_Management = 0;
                             $halfdays_Management = 0;
                             $late_comings_Management = 0;
-                            $total_hours_worked_PHt = 0;
                             @endphp
                             @foreach ($employees as $employee)
                             @if ($employee->department == 'PH-Team')
@@ -384,7 +381,7 @@
                                 <td class="px-4 py-3">{{ $employee->sick_leaves}}</td>
                                 <td class="px-4 py-3">{{ $employee->halfdays}}</td>
                                 <td class="px-4 py-3">{{ $employee->late_comings}}</td>
-                                <td class="px-4 py-3">{{ gmdate('H:i', $employee->total_hours_worked * 3600) }}</td>
+                                <td class="px-4 py-3">{{ $employee->total_hours_worked_formatted }}</td>
                             </tr>
                             @php
                             $planned_leaves_Management += $employee->planned_leaves;
@@ -392,7 +389,6 @@
                             $sick_leaves_Management += $employee->sick_leaves;
                             $halfdays_Management += $employee->halfdays;
                             $late_comings_Management += $employee->late_comings;
-                            $total_hours_worked_PHt += $employee->total_hours_worked;
                             @endphp
                             @endif
                             @endforeach
@@ -404,7 +400,7 @@
                                 <td class="px-4 py-3"><strong>{{ $sick_leaves_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $halfdays_Management}}</strong></td>
                                 <td class="px-4 py-3"><strong>{{ $late_comings_Management}}</strong></td>
-                                <td class="px-4 py-3"><strong>{{ gmdate('H:i', $total_hours_worked_PHt * 3600)}}</strong></td>
+                                <td class="px-4 py-3"><strong>{{ $ph_team_total_worked_mins_formatted}}</strong></td>
                             </tr>
                         </tbody>
                     </table>
