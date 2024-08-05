@@ -26,6 +26,15 @@
                             <div>
                                 <input type="date" name="date" id="date" class="px-4  text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('date') }}">
                             </div>
+                            
+                        </div>
+
+                        <div class="ml-4 flex items-center">
+                            <label for="user" class="text-sm text-gray-700 pr-4">Filter By Month : </label>
+                            
+                            <div>
+                                <input type="month" name="month" id="month" class="px-4  text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('date') }}">
+                            </div>
                         </div>
 
                         <div>

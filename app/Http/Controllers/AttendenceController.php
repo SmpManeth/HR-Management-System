@@ -16,25 +16,26 @@ class AttendenceController extends Controller
     {
 
 
-        $attendances = Attendence::with('employee')
-            ->whereHas('employee', function ($query) {
-            $query->where('status', 'active');
-            })
-            ->orderBy('date', 'asc');
+        $attendances = Attendence::with('employee')->orderBy('date', 'asc');
 
            
         if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
-                ->where('date', $request->date);
+            ->where('date', $request->date);
+        } elseif (!empty($request->month) && !empty($request->user)) {
+            $attendances->where('employee_id', $request->user)
+            ->where('date', 'like', $request->month . '%');
         } elseif (!empty($request->user)) {
             $attendances->where('employee_id', $request->user);
         } elseif (!empty($request->date)) {
             $attendances->where('date', $request->date);
+        } elseif (!empty($request->month)) {
+            $attendances->where('date', 'like', $request->month . '%');
         }
 
         $attendances = $attendances->get();
 
-        $allEmployees = Employee::where('status', 'active')->get();
+        $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
 
