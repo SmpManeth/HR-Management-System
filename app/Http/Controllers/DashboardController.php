@@ -23,13 +23,13 @@ class DashboardController extends Controller
             $month = Carbon::parse($request->month)->month;
 
             //get the Employees with attendances for the month and year from attendances where date is year and month
-            $employees = Employee::with(['attendances' => function ($query) use ($year, $month) {
+            $employees = Employee::where('status', 'active')->with(['attendances' => function ($query) use ($year, $month) {
                 $query->whereYear('date', $year)->whereMonth('date', $month);
             }])->get();
             // dd( $employees);
         } else {
 
-            $employees = Employee::with('attendances')->get();
+            $employees = Employee::where('status', 'active')->with('attendances')->get();
         }
 
 
