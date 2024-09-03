@@ -21,6 +21,20 @@
                             </select>
                         </div>
 
+                        <div>
+                            <label for="user" class="text-sm text-gray-700 pr-4">Filter By Department : </label>
+                            <select name="department" id="department" class="border border-gray-300 rounded-md text-sm text-gray-500 p-2">
+                                <option disabled selected>Select Department</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Management">Management</option>
+                                <option value="Web & Marketing">Marketing</option>
+                                <option value="IT">IT</option>
+                                <option value="Sales">Sales</option>
+                                <option value="HR">HR</option>
+                                <option value="PH-Team">PH-Team</option>
+                            </select>
+                        </div>
+
                         <div class="ml-4 flex items-center">
                             <label for="user" class="text-sm text-gray-700 pr-4">Filter By Date : </label>
                             <div>
