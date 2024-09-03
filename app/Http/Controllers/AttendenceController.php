@@ -14,48 +14,30 @@ class AttendenceController extends Controller
      */
     public function index(Request $request)
     {
+
+
         $attendances = Attendence::with('employee')->orderBy('date', 'asc');
 
-        if (!empty($request->user) && !empty($request->date) && !empty($request->department)) {
+           
+        if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', $request->date)
-            ->whereHas('employee', function ($query) use ($request) {
-                $query->where('department', $request->department);
-            });
-        } elseif (!empty($request->month) && !empty($request->user) && !empty($request->department)) {
+            ->where('date', $request->date);
+        } elseif (!empty($request->month) && !empty($request->user)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', 'like', $request->month . '%')
-            ->whereHas('employee', function ($query) use ($request) {
-                $query->where('department', $request->department);
-            });
-        } elseif (!empty($request->user) && !empty($request->department)) {
-            $attendances->where('employee_id', $request->user)
-            ->whereHas('employee', function ($query) use ($request) {
-                $query->where('department', $request->department);
-            });
-        } elseif (!empty($request->date) && !empty($request->department)) {
-            $attendances->where('date', $request->date)
-            ->whereHas('employee', function ($query) use ($request) {
-                $query->where('department', $request->department);
-            });
-        } elseif (!empty($request->month) && !empty($request->department)) {
-            $attendances->where('date', 'like', $request->month . '%')
-            ->whereHas('employee', function ($query) use ($request) {
-                $query->where('department', $request->department);
-            });
-        } elseif (!empty($request->department)) {
-            $attendances->whereHas('employee', function ($query) use ($request) {
-            $query->where('department', $request->department);
-            });
+            ->where('date', 'like', $request->month . '%');
+        } elseif (!empty($request->user)) {
+            $attendances->where('employee_id', $request->user);
+        } elseif (!empty($request->date)) {
+            $attendances->where('date', $request->date);
+        } elseif (!empty($request->month)) {
+            $attendances->where('date', 'like', $request->month . '%');
         }
 
-        // Paginate the results
-        $attendances = $attendances->paginate(10); // Adjust the number per page as needed
+        $attendances = $attendances->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
-
 
     public function generate(Request $request)
     {
