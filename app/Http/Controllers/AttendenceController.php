@@ -14,17 +14,14 @@ class AttendenceController extends Controller
      */
     public function index(Request $request)
     {
-
-
         $attendances = Attendence::with('employee')->orderBy('date', 'asc');
 
-           
         if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', $request->date);
+                ->where('date', $request->date);
         } elseif (!empty($request->month) && !empty($request->user)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', 'like', $request->month . '%');
+                ->where('date', 'like', $request->month . '%');
         } elseif (!empty($request->user)) {
             $attendances->where('employee_id', $request->user);
         } elseif (!empty($request->date)) {
@@ -33,11 +30,13 @@ class AttendenceController extends Controller
             $attendances->where('date', 'like', $request->month . '%');
         }
 
-        $attendances = $attendances->get();
+        // Paginate the results
+        $attendances = $attendances->paginate(10); // Adjust the number per page as needed
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
+
 
     public function generate(Request $request)
     {
