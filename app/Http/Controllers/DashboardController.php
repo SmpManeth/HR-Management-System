@@ -34,6 +34,7 @@ class DashboardController extends Controller
 
 
 
+
         $employees = $employees->map(function ($employee) {
             $statuses = ['Unplanned Leave', 'Planned Leave', 'Sick Leave', 'Half Day', 'Late Coming'];
             
@@ -90,8 +91,7 @@ class DashboardController extends Controller
         $ph_team_total_worked_mins_formatted = $department_worked_mins['PH-Team'];
 
 
-        // dd($employees[0]->total_hours_worked);
-
+        //  dd($employees);
         return view('dashboard', compact('employees', 'admin_total_worked_mins_formatted' , 'management_total_worked_mins_formatted' , 'hr_total_worked_mins_formatted' , 'it_total_worked_mins_formatted' , 'web_and_marketing_total_worked_mins_formatted' , 'sales_total_worked_mins_formatted' , 'ph_team_total_worked_mins_formatted'));
     }
 
