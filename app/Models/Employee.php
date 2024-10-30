@@ -27,6 +27,11 @@ class Employee extends Model
         'Contact_Number',
         'work_location',
         'joined_date',
+        'Emergency_Contact_First_Name',
+        'Emergency_Contact_Last_Name',
+        'Emergency_Contact_Contact_no',
+        'Emergency_Contact_Relationship',
+        'Emergency_Contact_Address',
     ];
 
     public function attendances()

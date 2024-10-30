@@ -49,7 +49,14 @@ class EmployeeController extends Controller
             'weekend_shift' => 'nullable',
             'total_leaves_per_month' => 'required',
             'status' => 'required',
+            'Emergency_Contact_First_Name' => 'nullable',
+            'Emergency_Contact_Last_Name' => 'nullable',
+            'Emergency_Contact_Contact_no' => 'nullable',
+            'Emergency_Contact_Relationship' => 'nullable',
+            'Emergency_Contact_Address' => 'nullable'
         ]);
+
+        // dd($validatedData);
 
         //create an Employee with validated data
         Employee::create($validatedData);
@@ -96,6 +103,11 @@ class EmployeeController extends Controller
             'weekend_shift' => 'nullable',
             'total_leaves_per_month' => 'required',
             'status' => 'required',
+            'Emergency_Contact_First_Name' => 'nullable',
+            'Emergency_Contact_Last_Name' => 'nullable',
+            'Emergency_Contact_Contact_no' => 'nullable',
+            'Emergency_Contact_Relationship' => 'nullable',
+            'Emergency_Contact_Address' => 'nullable'
         ]);
 
 

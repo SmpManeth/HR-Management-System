@@ -126,7 +126,34 @@
                             <option value="inactive">Inactive</option>
                         </select>
                     </div>
-                
+
+                </div>
+
+                <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">Emergency Contact</h2>
+
+                <div class="grid gap-4 mb-4 md:gap-6 md:grid-cols-4 sm:mb-8">
+                    <div>
+                        <label for="Emergency_Contact_First_Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                        <input type="text" name="Emergency_Contact_First_Name" id="Emergency_Contact_First_Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="First Name">
+                    </div>
+                    <div>
+                        <label for="Emergency_Contact_Last_Name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                        <input type="text" name="Emergency_Contact_Last_Name" id="Emergency_Contact_Last_Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Last Name">
+                    </div>
+                    <div>
+                        <label for="Emergency_Contact_Contact_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+                        <input type="text" name="Emergency_Contact_Contact_no" id="Emergency_Contact_Contact_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Contact Number">
+                    </div>
+                    <div>
+                        <label for="Emergency_Contact_Relationship" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Relationship</label>
+                        <input type="text" name="Emergency_Contact_Relationship" id="Emergency_Contact_Relationship" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Relationship">
+                    </div>
+
+                    <div>
+                        <label for="Emergency_Contact_Address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                        <input type="text" name="Emergency_Contact_Address" id="Emergency_Contact_Address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Address">
+                    </div>
+
                 </div>
 
                 <button type="submit" class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">

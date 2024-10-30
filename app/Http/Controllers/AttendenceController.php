@@ -33,7 +33,12 @@ class AttendenceController extends Controller
             $attendances->where('date', 'like', $request->month . '%');
         }
 
-        $attendances = $attendances->get();
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        
+        $attendances = $attendances->whereMonth('date', $currentMonth)
+                                   ->whereYear('date', $currentYear)
+                                   ->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
