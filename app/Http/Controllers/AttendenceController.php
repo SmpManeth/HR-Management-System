@@ -18,13 +18,13 @@ class AttendenceController extends Controller
 
         $attendances = Attendence::with('employee')->orderBy('date', 'asc');
 
-           
+
         if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', $request->date);
+                ->where('date', $request->date);
         } elseif (!empty($request->month) && !empty($request->user)) {
             $attendances->where('employee_id', $request->user)
-            ->where('date', 'like', $request->month . '%');
+                ->where('date', 'like', $request->month . '%');
         } elseif (!empty($request->user)) {
             $attendances->where('employee_id', $request->user);
         } elseif (!empty($request->date)) {
@@ -35,10 +35,14 @@ class AttendenceController extends Controller
 
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
-        
-        $attendances = $attendances->whereMonth('date', $currentMonth)
-                                   ->whereYear('date', $currentYear)
-                                   ->get();
+
+        $attendances = Attendence::with('employee')
+            ->whereHas('employee', function ($query) {
+                $query->where('status', 'active');
+            })
+            ->whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
