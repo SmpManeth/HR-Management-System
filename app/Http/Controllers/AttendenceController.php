@@ -18,6 +18,7 @@ class AttendenceController extends Controller
 
         $attendances = Attendence::with('employee')->orderBy('date', 'asc');
 
+        // dd();
 
         if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
@@ -28,21 +29,63 @@ class AttendenceController extends Controller
         } elseif (!empty($request->user)) {
             $attendances->where('employee_id', $request->user);
         } elseif (!empty($request->date)) {
-            $attendances->where('date', $request->date);
+            $attendances = Attendence::whereHas('employee', function ($query) {
+                $query->where('status', 'active'); // Only include active employees
+            })
+                ->whereDate('date', $request->date) // Filter by the specific date provided in the request
+                ->with(['employee' => function ($query) {
+                    $query->where('status', 'active'); // Ensure only active employees are eager loaded
+                }])
+                ->orderBy('date', 'asc'); // Order by date in ascending order if needed
         } elseif (!empty($request->month)) {
-            $attendances->where('date', 'like', $request->month . '%');
-        }
+            $attendances = Attendence::whereHas('employee', function ($query) {
+                $query->where('status', 'active'); // Only include active employees
+            })
+                ->whereDate('date', 'like', $request->month . '%') // Filter by the specific date provided in the request
+                ->with(['employee' => function ($query) {
+                    $query->where('status', 'active'); // Ensure only active employees are eager loaded
+                }])
+                ->orderBy('date', 'asc'); // Order by date in ascending order if needed
+        } else {
+            $currentMonth = Carbon::now()->month;
+            $currentYear = Carbon::now()->year;
 
-        $currentMonth = Carbon::now()->month;
-        $currentYear = Carbon::now()->year;
-
-        $attendances = Attendence::with('employee')
-            ->whereHas('employee', function ($query) {
+            $attendances = Attendence::whereHas('employee', function ($query) {
                 $query->where('status', 'active');
             })
-            ->whereMonth('date', $currentMonth)
-            ->whereYear('date', $currentYear)
-            ->get();
+                ->whereMonth('date', $currentMonth)
+                ->whereYear('date', $currentYear)
+                ->with('employee')
+                ->orderBy('date', 'asc'); // Order by date in ascending order
+        }
+
+        $attendances = $attendances->get();
+
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
+
+        // $attendances = Attendence::whereHas('employee', function ($query) {
+        //         $query->where('status', 'active');
+        //     })
+        //     ->whereMonth('date', $currentMonth)
+        //     ->whereYear('date', $currentYear)
+        //     ->with('employee')
+        //     ->orderBy('date', 'asc') // Order by date in ascending order
+        //     ->get();
+
+        // $currentMonth = Carbon::now()->month;
+        // $currentYear = Carbon::now()->year;
+
+        // $attendances = Attendence::whereHas('employee', function ($query) {
+        //     $query->where('status', 'active');
+        // })
+        //     ->whereMonth('date', $currentMonth)
+        //     ->whereYear('date', $currentYear)
+        //     ->with('employee')
+        //     ->orderBy('date', 'asc') // Order by date in ascending order
+        //     ->get();
+
+
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
@@ -78,6 +121,8 @@ class AttendenceController extends Controller
                 ->toArray();
 
 
+
+
             // Check which days are missing for the current employee
             $missingDays = array_diff($allDays, $attendanceData);
 
@@ -102,7 +147,17 @@ class AttendenceController extends Controller
             Attendence::insert($newAttendanceRecords);
         }
 
-        $attendances = Attendence::with('employee')->orderBy('date', 'asc')->get();
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $attendances = Attendence::whereHas('employee', function ($query) {
+            $query->where('status', 'active');
+        })
+            ->whereMonth('date', $currentMonth)
+            ->whereYear('date', $currentYear)
+            ->with('employee')
+            ->orderBy('date', 'asc') // Order by date in ascending order
+            ->get();
 
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
