@@ -14,11 +14,7 @@ class AttendenceController extends Controller
      */
     public function index(Request $request)
     {
-
-
         $attendances = Attendence::with('employee')->orderBy('date', 'asc');
-
-        // dd();
 
         if (!empty($request->user) && !empty($request->date)) {
             $attendances->where('employee_id', $request->user)
@@ -29,41 +25,38 @@ class AttendenceController extends Controller
         } elseif (!empty($request->user)) {
             $attendances->where('employee_id', $request->user);
         } elseif (!empty($request->date)) {
-            $attendances = Attendence::whereHas('employee', function ($query) {
-                $query->where('status', 'active'); // Only include active employees
-            })
-                ->whereDate('date', $request->date) // Filter by the specific date provided in the request
+            $attendances->whereHas('employee', function ($query) {
+                $query->where('status', 'active');
+            })->whereDate('date', $request->date)
                 ->with(['employee' => function ($query) {
-                    $query->where('status', 'active'); // Ensure only active employees are eager loaded
-                }])
-                ->orderBy('date', 'asc'); // Order by date in ascending order if needed
+                    $query->where('status', 'active');
+                }]);
         } elseif (!empty($request->month)) {
-            $attendances = Attendence::whereHas('employee', function ($query) {
-                $query->where('status', 'active'); // Only include active employees
-            })
-                ->whereDate('date', 'like', $request->month . '%') // Filter by the specific date provided in the request
+            $attendances->whereHas('employee', function ($query) {
+                $query->where('status', 'active');
+            })->where('date', 'like', $request->month . '%')
                 ->with(['employee' => function ($query) {
-                    $query->where('status', 'active'); // Ensure only active employees are eager loaded
-                }])
-                ->orderBy('date', 'asc'); // Order by date in ascending order if needed
+                    $query->where('status', 'active');
+                }]);
         } else {
             $currentMonth = Carbon::now()->month;
             $currentYear = Carbon::now()->year;
 
-            $attendances = Attendence::whereHas('employee', function ($query) {
+            $attendances->whereHas('employee', function ($query) {
                 $query->where('status', 'active');
-            })
-                ->whereMonth('date', $currentMonth)
+            })->whereMonth('date', $currentMonth)
                 ->whereYear('date', $currentYear)
-                ->with('employee')
-                ->orderBy('date', 'asc'); // Order by date in ascending order
+                ->with('employee');
         }
 
-        $attendances = $attendances->get();
+        // Use pagination (10 records per page)
+        $attendances = $attendances->paginate(10);
 
-
+        // Append query parameters to pagination links
+        $attendances->appends($request->query());
 
         $allEmployees = Employee::all();
+
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
 
