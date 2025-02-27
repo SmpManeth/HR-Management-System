@@ -59,6 +59,12 @@ class AttendenceController extends Controller
                 ->orderBy('date', 'asc'); // Order by date in ascending order
         }
 
+        $attendances = $attendances->get();
+
+       
+
+
+
         $allEmployees = Employee::all();
         return view('pages.attendance.index', compact('allEmployees', 'attendances'));
     }
