@@ -22,30 +22,42 @@
                     </div>
                 </div>
 
+                <div>
+
+                    <input type="hidden" name="id" value="{{ $attendence->id}}">
+                    <input type="hidden" name="employee_id" value="{{ $attendence->employee_id}}">
+
+                    <br>
+
+                </div>
 
                 <div class="grid grid-cols-2 gap-4 mt-8">
+
                     <div>
                         <label for="date" class="block mb-2 text-sm font-small text-gray-900">Date</label>
-                        <input type="hidden" name="id" value="{{ $attendence->id}}">
-                        <input type="hidden" name="employee_id" value="{{ $attendence->employee_id}}">
                         <input type="date" name="date" id="date" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('date', $attendence->date) }}">
                         @error('date')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
-                        <br>
-                        <label for="check_out" class="block mb-2 text-sm font-small text-gray-900">Time Out</label>
-                        <input type="time" name="check_out" id="check_out" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('check_out', $attendence->check_out) }}">
-                        @error('check_out')
-                        <p class="text-red-500 text-sm">{{ $message }}</p>
-                        @enderror
                     </div>
+
                     <div>
                         <label for="check_in" class="block mb-2 text-sm font-small text-gray-900">Time In</label>
                         <input type="time" name="check_in" id="check_in" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('check_in', $attendence->check_in) }}">
                         @error('check_in')
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
-                        <br>
+                    </div>
+
+                    <div>
+                        <label for="check_out" class="block mb-2 text-sm font-small text-gray-900">Time Out</label>
+                        <input type="time" name="check_out" id="check_out" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900" value="{{ old('check_out', $attendence->check_out) }}">
+                        @error('check_out')
+                        <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
                         <label for="status" class="block mb-2 text-sm font-small text-gray-900">Status</label>
                         <select name="status" id="status" class="block w-full px-4 py-2 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 focus:outline-none dark:bg-gray-800 dark:text-gray-300 dark:border-gray-900">
                             <option value="Half Day" {{ old('status', $attendence->status) == 'Half Day' ? 'selected' : '' }}>Half Day</option>
@@ -58,6 +70,8 @@
                         <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
+
+                   
                 </div>
 
                 <div class="pt-4">
