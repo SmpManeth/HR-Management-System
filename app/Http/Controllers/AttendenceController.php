@@ -61,8 +61,6 @@ class AttendenceController extends Controller
 
         $attendances = $attendances->get();
 
-       
-
 
 
         $allEmployees = Employee::all();
