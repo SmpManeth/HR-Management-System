@@ -151,7 +151,6 @@ class AttendenceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
 
         $validated = $request->validate([
             'employee_id' => 'required',
@@ -180,6 +179,10 @@ class AttendenceController extends Controller
         $check_out = $request->check_out;
 
         $shift_time = array_map('trim', explode('-', $shift));
+
+        if ($shift === "OFF") {
+            return back()->with('error', 'Employee is off on this day. Please select another day or Assign a shift to the employee');
+        }
 
         //check if the employee is late or not by comparing the check_in time with the shift time[0] and checkout with shift time[1]
         $status = '';
