@@ -60,6 +60,7 @@
                             <option value="Sales">Sales</option>
                             <option value="HR">HR</option>
                             <option value="PH-Team">PH-Team</option>
+                            <option value="Other Operations">Other Operations </option>
                         </select>
                     </div>
 
@@ -85,6 +86,7 @@
                             <option value="09:00 - 17:00">09:00 - 17:00</option>
                             <option value="10:00 - 18:00">10:00 - 18:00</option>
                             <option value="10:00 - 19:00">10:00 - 19:00</option>
+                            <option value="10:00 - 03:00">10:00 - 03:00</option>
                             <option value="11:00 - 19.00">11:00 - 19.00</option>
                             <option value="11:30 - 18.30">11:30 - 18.30</option>
                             <option value="12:00 - 19:00">12:00 - 19:00</option>
@@ -104,6 +106,7 @@
                         <label for="weekend_shift" class="inline-flex items-center mb-2 text-sm font-medium text-gray-900 dark:text-white"> Weekend Shift </label>
                         <select id="weekend_shift" name="weekend_shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option disabled selected>Select Shift</option>
+                            <option value="10:00 - 03:00">10:00 - 03:00</option>
                             <option value="12:00 - 21:00">12:00 - 21:00</option>
                             <option value="13:00 - 20:00">13:00 - 20:00</option>
                             <option value="13:00 - 22:00">13:00 - 22:00</option>
