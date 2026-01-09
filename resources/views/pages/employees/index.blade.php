@@ -4,7 +4,19 @@
         <x-session-message :message="['success' => session('success'), 'error' => session('error')]" />
 
         <div class="mx-auto">
-            <h2 class="mb-4 text-xl font-semibold leading-none text-gray-900 dark:text-white">All Employees</h2>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+                <h2 class="mb-4 sm:mb-0 text-xl font-semibold leading-none text-gray-900 dark:text-white">All Employees</h2>
+                
+                <!-- Status Filter -->
+                <form method="GET" action="{{ route('employees.index') }}" class="flex items-center gap-2">
+                    <label for="status-filter" class="text-sm font-medium text-gray-700 dark:text-gray-300">Filter by Status:</label>
+                    <select id="status-filter" name="status" onchange="this.form.submit()" class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-3 py-2">
+                        <option value="all" {{ $selectedStatus === 'all' ? 'selected' : '' }}>All</option>
+                        <option value="active" {{ $selectedStatus === 'active' ? 'selected' : '' }}>Active</option>
+                        <option value="inactive" {{ $selectedStatus === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                    </select>
+                </form>
+            </div>
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 

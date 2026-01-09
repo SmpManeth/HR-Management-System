@@ -11,10 +11,18 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = Employee::orderBy('Employee_ID', 'asc');
+        
+        // Filter by status if provided
+        if ($request->has('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+        
         return view('pages.employees.index')->with([
-            'employees' => Employee::orderBy('Employee_ID', 'asc')->get(),
+            'employees' => $query->get(),
+            'selectedStatus' => $request->get('status', 'all'),
         ]);
     }
 
