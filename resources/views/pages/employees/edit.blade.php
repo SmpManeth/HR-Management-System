@@ -81,6 +81,7 @@
                             <option value="10:00 - 19:00" {{ old('weekday_shift', $employee->weekday_shift) == '10:00 - 19:00' ? 'selected' : '' }}>10:00 - 19:00</option>
                             <option value="10:00 - 03:00" {{ old('weekday_shift', $employee->weekday_shift) == '10:00 - 03:00' ? 'selected' : '' }}>10:00 - 03:00</option>
                             <option value="11:00 - 19.00" {{ old('weekday_shift', $employee->weekday_shift) == '11:00 - 19.00' ? 'selected' : '' }}>11:00 - 19.00</option>
+                            <option value="11:00 - 20:00" {{ old('weekday_shift', $employee->weekday_shift) == '11:00 - 20:00' ? 'selected' : '' }}>11:00 - 20:00</option>
                             <option value="11:30 - 18.30" {{ old('weekday_shift', $employee->weekday_shift) == '11:30 - 18.30' ? 'selected' : '' }}>11:30 - 18.30</option>
                             <option value="12:00 - 19:00" {{ old('weekday_shift', $employee->weekday_shift) == '12:00 - 19:00' ? 'selected' : '' }}>12:00 - 19:00</option>
                             <option value="12:00 - 21:00" {{ old('weekday_shift', $employee->weekday_shift) == '12:00 - 21:00' ? 'selected' : '' }}>12:00 - 21:00</option>
@@ -102,6 +103,7 @@
                         <select id="weekend_shift" name="weekend_shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option disabled selected>Select Shift</option>
                             <option value="10:00 - 03:00" {{ old('weekday_shift', $employee->weekday_shift) == '10:00 - 03:00' ? 'selected' : '' }}>10:00 - 03:00</option>
+                            <option value="11:00 - 20:00" {{ old('weekend_shift', $employee->weekend_shift) == '11:00 - 20:00' ? 'selected' : '' }}>11:00 - 20:00</option>
                             <option value="12:00 - 21:00" {{ old('weekend_shift', $employee->weekend_shift) == '12:00 - 21:00' ? 'selected' : '' }}>12:00 - 21:00</option>
                             <option value="13:00 - 20:00" {{ old('weekend_shift', $employee->weekend_shift) == '13:00 - 20:00' ? 'selected' : '' }}>13:00 - 20:00</option>
                             <option value="13:00 - 22:00" {{ old('weekend_shift', $employee->weekend_shift) == '13:00 - 22:00' ? 'selected' : '' }}>13:00 - 22:00</option>
