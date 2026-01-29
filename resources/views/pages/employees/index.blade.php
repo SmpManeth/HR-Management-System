@@ -28,14 +28,13 @@
                             <tr>
                                 <th scope="col" class="px-4 py-3">ID</th>
                                 <th scope="col" class="px-4 py-3">Full Name</th>
-                                <th scope="col" class="px-4 py-3">Stage Name</th>
+                                <th scope="col" class="px-4 py-3">Joined Date</th>
                                 <th scope="col" class="px-4 py-3">Location</th>
                                 <th scope="col" class="px-4 py-3">Email</th>
                                 <th scope="col" class="px-4 py-3">Department</th>
                                 <th scope="col" class="px-4 py-3">Designation</th>
                                 <th scope="col" class="px-4 py-3">Weekday Shift</th>
                                 <th scope="col" class="px-4 py-3">Weekend Shift</th>
-                                <th scope="col" class="px-4 py-3">leaves per Month</th>
                                 <th scope="col" class="px-4 py-3">Status</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
@@ -46,15 +45,14 @@
                             @foreach ($employees as $employee)
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $employee->Employee_ID}}</th>
-                                <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}}</td>
-                                <td class="px-4 py-3">{{ $employee->Stage_name}}</td>
+                                <td class="px-4 py-3">{{ $employee->First_Name}} {{ $employee->Last_Name}} ({{ $employee->Stage_name}})</td>
+                                <td class="px-4 py-3">{{ \Carbon\Carbon::parse($employee->joined_date)->format('M d, Y') }}</td>
                                 <td class="px-4 py-3">{{ $employee->work_location}}</td>
                                 <td class="px-4 py-3">{{ $employee->email}}</td>
                                 <td class="px-4 py-3">{{ $employee->department}}</td>
                                 <td class="px-4 py-3">{{ $employee->employee_desgination}}</td>
                                 <td class="px-4 py-3">{{ $employee->weekday_shift}}</td>
                                 <td class="px-4 py-3">{{ $employee->weekend_shift}}</td>
-                                <td class="px-4 py-3">{{ $employee->total_leaves_per_month}}</td>
                                 <td class="px-4 py-3 whitespace-nowrap">
                                     <div class="w-fit bg-{{ $employee->status == 'active' ? 'green' : 'red' }}-100 text-{{ $employee->status == 'active' ? 'green' : 'red' }}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
                                         {{ $employee->status == 'active' ? 'Active' : 'Inactive' }}
