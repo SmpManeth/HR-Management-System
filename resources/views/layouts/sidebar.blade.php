@@ -49,6 +49,25 @@
 
                  </ul>
              </li>
+             <li>
+                 <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-users" data-collapse-toggle="dropdown-users">
+                     <svg class="w-5 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                         <path d="M12 4a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4Zm0 10c4.97 0 9 2.239 9 5v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1c0-2.761 4.03-5 9-5Z" />
+                     </svg>
+                     <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Users</span>
+                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                     </svg>
+                 </button>
+                 <ul id="dropdown-users" class="hidden py-2 space-y-2">
+                     <li>
+                         <a href="{{ route('users.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">All Users</a>
+                     </li>
+                     <li>
+                         <a href="{{ route('users.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add New User</a>
+                     </li>
+                 </ul>
+             </li>
           
          </ul>
      </div>
